@@ -175,7 +175,7 @@ class CustomEncryptedClient(AsyncClient):
     async def do_sync(self):
         while True:
             try:
-                return await client.sync_forever(30000, full_state=True))
+                return await client.sync_forever(30000, full_state=True)
             except Exception:
                 print("Exception:" + traceback.format_exc())
 
