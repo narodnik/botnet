@@ -2,6 +2,7 @@ import asyncio
 import os
 import sys
 import json
+import traceback
 
 from typing import Optional
 
@@ -131,9 +132,8 @@ class CustomEncryptedClient(AsyncClient):
                 },
                 ignore_unverified_devices=True,
             )
-        except Exception as err:
-            #logger.debug("Here is the traceback.\n" + traceback.format_exc())
-            print(err)
+        except Exception:
+            print("Exception:" + traceback.format_exc())
 
     def add_topic(self, topic):
         topics = self.get_topics()
@@ -172,6 +172,13 @@ class CustomEncryptedClient(AsyncClient):
                 "user_id": resp.user_id
             }, f)
 
+    async def do_sync(self):
+        while True:
+            try:
+                return await client.sync_forever(30000, full_state=True))
+            except Exception:
+                print("Exception:" + traceback.format_exc())
+
 
 async def run_client(client: CustomEncryptedClient) -> None:
     # This is our own custom login function that looks for a pre-existing config
@@ -192,7 +199,7 @@ async def run_client(client: CustomEncryptedClient) -> None:
     # We use full_state=True here to pull any room invites that occured or
     # messages sent in rooms _before_ this program connected to the
     # Matrix server
-    sync_forever_task = asyncio.ensure_future(client.sync_forever(30000, full_state=True))
+    sync_forever_task = asyncio.ensure_future(client.do_sync())
 
     await asyncio.gather(
         # The order here IS significant! You have to register the task to trust
