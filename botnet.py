@@ -13,7 +13,7 @@ from nio import (AsyncClient, ClientConfig, DevicesError, Event,InviteEvent, Log
 STORE_FOLDER = "nio_store/"
 SESSION_DETAILS_FILE = "credentials.json"
 
-ROOM_ID = "!vQYIzdbHTOFwrjzIna:dark.fi"
+ROOM_ID = "!BQEjGPeQwWMEvvOLtO:dark.fi"
 
 ALICE_HOMESERVER = "https://matrix.dark.fi"
 
