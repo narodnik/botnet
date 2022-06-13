@@ -15,7 +15,7 @@ SESSION_DETAILS_FILE = "credentials.json"
 
 ROOM_ID = "!BQEjGPeQwWMEvvOLtO:dark.fi"
 
-ALICE_HOMESERVER = "https://matrix.dark.fi"
+ALICE_HOMESERVER = "https://matrix.poa.st"
 
 with open("config.json", "r") as f:
     config = json.load(f)
